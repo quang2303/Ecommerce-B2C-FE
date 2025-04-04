@@ -45,7 +45,7 @@ const VerifyPage = () => {
       return navigate("/sign-up");
     } else if (JSON.parse(localStorage.getItem("user")).active === "active") {
       toast.dismiss();
-      toast.success("Chào mừng bạn đến với HC.VN", { pauseOnHover: false });
+      toast.success("Chào mừng bạn đến với PT", { pauseOnHover: false });
       return navigate("/");
     }
   }, []);
@@ -64,7 +64,7 @@ const VerifyPage = () => {
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
       toast.dismiss();
-      toast.success("Chào mừng bạn đến với HC.VN", { pauseOnHover: false });
+      toast.success("Chào mừng bạn đến với PT", { pauseOnHover: false });
       navigate("/");
       reset({
         verify: "",

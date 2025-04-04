@@ -36,7 +36,9 @@ const userApi = {
   },
   getUser() {
     const url = "/api/v1/users/me";
-    return axiosClient.get(url);
+    const a = axiosClient.get(url);
+    console.log(a);
+    return a;
   },
   resetPassword(data, token) {
     const url = `/api/v1/users/resetPassword/${token}`;

@@ -4,6 +4,7 @@ import { action_status } from "../../utils/constants/status";
 import StorageKeys from "../../utils/constants/storage-keys";
 
 export const register = createAsyncThunk("user/register", async (payload) => {
+  console.log("register");
   const response = await userApi.register(payload);
   localStorage.setItem(StorageKeys.TOKEN, response.token);
   localStorage.setItem(StorageKeys.USER, JSON.stringify(response.data.user));
@@ -12,7 +13,6 @@ export const register = createAsyncThunk("user/register", async (payload) => {
 
 export const verify = createAsyncThunk("user/verify", async (payload) => {
   const response = await userApi.verify(payload);
-  localStorage.setItem("tokenStream", response.tokenStream);
   localStorage.setItem(StorageKeys.TOKEN, response.token);
   localStorage.setItem(StorageKeys.USER, JSON.stringify(response.data.user));
   return response.data.user;
@@ -32,7 +32,6 @@ export const resetPassword = createAsyncThunk(
   async (payload) => {
     console.log(payload);
     const response = await userApi.resetPassword(payload, payload.token);
-    localStorage.setItem("tokenStream", response.tokenStream);
     localStorage.setItem(StorageKeys.TOKEN, response.token);
     localStorage.setItem(StorageKeys.USER, JSON.stringify(response.data.user));
     return response.data.user;
@@ -57,7 +56,6 @@ export const verifyResetPassword = createAsyncThunk(
 
 export const login = createAsyncThunk("user/login", async (payload) => {
   const response = await userApi.login(payload);
-  localStorage.setItem("tokenStream", response.tokenStream);
   localStorage.setItem(StorageKeys.TOKEN, response.token);
   localStorage.setItem(StorageKeys.USER, JSON.stringify(response.data.user));
   return response.data.user;
@@ -67,7 +65,6 @@ export const loginWithGoogle = createAsyncThunk(
   "user/loginWithGoogle",
   async (payload) => {
     const response = await userApi.loginWithGoogle(payload);
-    localStorage.setItem("tokenStream", response.tokenStream);
     localStorage.setItem(StorageKeys.TOKEN, response.token);
     localStorage.setItem(StorageKeys.USER, JSON.stringify(response.data.user));
     return response.data.user;
@@ -76,11 +73,24 @@ export const loginWithGoogle = createAsyncThunk(
 
 export const updateInfoUser = createAsyncThunk(
   "user/updateInfoUser",
-  async (payload) => {
-    const response = await userApi.updateUser(payload);
-    localStorage.setItem(StorageKeys.TOKEN, response.token);
-    localStorage.setItem(StorageKeys.USER, JSON.stringify(response.data.user));
-    return response.data.user;
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await userApi.updateUser(payload);
+
+      if (!response.token) {
+        throw new Error("Token không tồn tại trong response");
+      }
+
+      localStorage.setItem(StorageKeys.TOKEN, response.token);
+      localStorage.setItem(
+        StorageKeys.USER,
+        JSON.stringify(response.data.user)
+      );
+
+      return response.data.user;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
 );
 
@@ -103,7 +113,6 @@ const userSlice = createSlice({
       localStorage.removeItem(StorageKeys.USER);
       localStorage.removeItem("order");
       localStorage.removeItem("keyword");
-      localStorage.removeItem("tokenStream");
       state.current = null;
     },
     refresh: (state, action) => {

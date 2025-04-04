@@ -125,18 +125,15 @@ const Navbar = () => {
               />
             </svg>
           </Link>
-          <Link to="/" className="flex items-center">
-            <div className="w-[100px] h-[120px]">
+          <Link to="/">
+            <div className="pt-5 w-[100px] h-[120px]">
               <img
                 src="/images/logo.png"
                 alt="logo"
-                className="w-full h-full object-cover"
+                className="object-cover"
                 title="Trang chủ"
               />
             </div>
-            <span className="text-white font-medium text-3xl" title="Trang chủ">
-              HC.VN
-            </span>
           </Link>
         </div>
 
@@ -145,7 +142,7 @@ const Navbar = () => {
             type="text"
             className="py-3 px-4 rounded-l-lg text-base w-[600px] flex-shrink-0 text-black"
             id="search"
-            placeholder="Nhập tên laptop cần tìm ..."
+            placeholder="Nhập tên sản phẩm cần tìm ..."
             onClick={handleClick}
             onChange={handleChange}
             value={keyword}

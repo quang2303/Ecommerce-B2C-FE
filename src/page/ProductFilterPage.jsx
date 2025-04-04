@@ -216,7 +216,7 @@ const ProductFilterPage = () => {
               </svg>
             </Link>
             <span className="text-base text-[#a8b4c9] font-medium">
-              Laptop chính hãng
+              Các sản phẩm
             </span>
           </div>
           <div className="wrapper-product">

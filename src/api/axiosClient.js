@@ -2,14 +2,18 @@ import axios from "axios";
 const axiosClient = axios.create({
   baseURL: "http://127.0.0.1:3000",
   headers: {
-    "Content-Type": "application/JSON",
+    "Content-Type": "application/json",
   },
   withCredentials: true,
 });
 axiosClient.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
+    const token = localStorage.getItem("jwt");
 
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      console.log("Header được gửi:", config.headers); // Kiểm tra header
+    }
     return config;
   },
   function (error) {

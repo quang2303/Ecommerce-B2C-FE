@@ -16,9 +16,7 @@ const AuthenticationPage = ({ children, className = "" }) => {
         </div>
       </Link>
       <div className="text-center">
-        <div className="text-4xl font-bold text-[#1DC071]">
-          Welcome to HC.VN
-        </div>
+        <div className="text-4xl font-bold text-[#1DC071]">Welcome to PT</div>
       </div>
       {children}
     </div>
