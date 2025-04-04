@@ -23,6 +23,7 @@ Dự án là một trang web bán thiết bị tin học và các sản phẩm c
 ### Cách cài đặt:
 
 - Clone repository này bên phía FrontEnd
+- Clone repository Backend : https://github.com/quang2303/Ecommerce-B2C-BE
 - Sau khi clone 2 repository này về:
   - cd vào repository bên phía FrontEnd gõ lệnh `npm i` để cài Node_Module sau khi cài sau gõ lệnh `npm run dev` để chạy.
   - cd vào repository bên phía BackEnd gõ lệnh `npm i` để cài Node_Module sau khi cài sau gõ lệnh `npm start` để chạy.
