@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosClient = axios.create({
-  baseURL: "https://ptadmin-seven.vercel.app/",
+  baseURL: "https://ptadmin.onrender.com/",
   headers: {
     "Content-Type": "application/json",
   },
