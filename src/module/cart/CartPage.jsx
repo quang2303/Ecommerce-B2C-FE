@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import CartHidden from "./CartHidden";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
-import PDF from "../../components/PDF/PDF";
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -178,7 +177,6 @@ const CartPage = () => {
           <CartHidden />
         )}
       </div>
-      <PDF componentRef={componentRef} />
     </div>
   );
 };
